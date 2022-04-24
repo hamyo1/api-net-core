@@ -22,6 +22,7 @@ namespace RapaportWebApplication.Controllers
             _diamondsCsvService = diamondsCsvService;
         }
 
+        //return json with httpResponseModel to the client
         [Route("PostNewDiamond")]
         [Consumes("application/json")]
         [Produces("application/json")]
@@ -35,6 +36,8 @@ namespace RapaportWebApplication.Controllers
 
             try
             {
+                throw new NotImplementedException();//(For testing)
+
                 if (!string.IsNullOrEmpty(diamondObject.clarity) && diamondObject.size > 0 && diamondObject.list_price > 0 &&
                     diamondObject.price > 0 && !string.IsNullOrEmpty(diamondObject.color) && !string.IsNullOrEmpty(diamondObject.shape))
                 {
@@ -48,6 +51,7 @@ namespace RapaportWebApplication.Controllers
             catch (Exception ex)
             {
                 _logger.LogError($"PostNewDiamond faild with message: {ex.Message}");
+                return Problem();
             }
 
 
@@ -58,6 +62,7 @@ namespace RapaportWebApplication.Controllers
 
         }
 
+        //return json with all the diamonds list
         [Route("GetAllDiamonds")]
         [Consumes("application/json")]
         [Produces("application/json")]
@@ -70,7 +75,7 @@ namespace RapaportWebApplication.Controllers
             _logger.LogInformation("request for all diamond data");
             try
             {
-                //throw new NotImplementedException();
+                //throw new NotImplementedException();//(For testing)
                 List<DiamondObject> diamonds = new List<DiamondObject>();
                 diamonds = _diamondsCsvService.GetDiamondListFromCsvFile();
                 _logger.LogInformation("GetAllDiamonds from csv file successed");
@@ -80,9 +85,7 @@ namespace RapaportWebApplication.Controllers
             catch (Exception ex)
             { 
                 _logger.LogError($"main prosess of get all diamond faild message:{ex.Message}");
-                httpResponseModel.ErrorDesc = "internal error";
-                httpResponseModel.ErrorCode = "500";
-                return Ok(httpResponseModel);
+                return Problem();
             }
 
         }

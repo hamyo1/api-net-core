@@ -18,7 +18,7 @@ namespace RapaportWebApplication.Services
 
 
 
-
+        //write new data to the diamond list
         public void AddDiamondToCsvFile(DiamondObject diamondObject)
         {
             try
@@ -39,11 +39,12 @@ namespace RapaportWebApplication.Services
             catch (Exception ex)
             {
                 _logger.LogError(ex.Message);
-                throw;
+                throw;//return to the client error 500
             }
 
         }        
         
+        //get all the diamonds list
         public List<DiamondObject> GetDiamondListFromCsvFile()
         {
             try
@@ -61,7 +62,7 @@ namespace RapaportWebApplication.Services
             catch (Exception ex)
             {
                 _logger.LogError(ex.Message);
-                throw;
+                throw;//return to the client error 500
             }
 
         }
