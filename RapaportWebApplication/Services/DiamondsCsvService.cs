@@ -39,6 +39,7 @@ namespace RapaportWebApplication.Services
             catch (Exception ex)
             {
                 _logger.LogError(ex.Message);
+                throw new NotImplementedException();
             }
 
         }        
@@ -60,7 +61,7 @@ namespace RapaportWebApplication.Services
             catch (Exception ex)
             {
                 _logger.LogError(ex.Message);
-                return null;
+                throw new NotImplementedException();
             }
 
         }
